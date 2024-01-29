@@ -11,11 +11,13 @@
     "@mdi/font": "7.0.96",
     "@syncfusion/ej2-vue-popups": "^24.1.46",
     "axios": "^1.6.7",
+    "papaparse": "^5.4.1",
     "roboto-fontface": "*",
     "vue": "^3.3.0",
     "vuetify": "^3.0.0"
   },
   "devDependencies": {
+    "@types/papaparse": "^5.3.14",
     "@vitejs/plugin-vue": "^4.5.0",
     "sass": "^1.69.0",
     "unplugin-fonts": "^1.1.0",
