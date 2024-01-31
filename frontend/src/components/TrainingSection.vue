@@ -14,8 +14,10 @@
   </div>
 </template>
 
-<script setup>
-defineProps(['training', 'trainingComplete']);
+<script>
+export default {
+  props: ['training', 'trainingComplete'],
+};
 </script>
 
 <style scoped>

@@ -1,9 +1,6 @@
 <template>
-  <v-stepper
-    v-model="currentStep"
-    :items="['Step 1', 'Step 2', 'Step 3']"
-    :next-text="currentStep === 2 ? 'Train' : 'Next'"
-  >
+  <v-stepper v-model="currentStep" :items="['Step 1', 'Step 2', 'Step 3']"
+    :next-text="currentStep === 2 ? 'Train' : 'Next'">
     <template v-slot:item.1>
       <v-card title="Dataset" flat>
         <UploadFile />
@@ -12,23 +9,34 @@
 
     <template v-slot:item.2>
       <v-card title="Modal" flat>
-        <ModelSelector />
+        <model-selector></model-selector>
       </v-card>
     </template>
 
     <template v-slot:item.3>
       <v-card flat>
-        <TrainingSection :training="true" :trainingComplete="false" />
+        <training-section :training="true" :trainingComplete="false"></training-section>
       </v-card>
     </template>
   </v-stepper>
 </template>
 
-<script setup>
-import UploadFile from "@/components/UploadFile";
-import ModelSelector from "@/components/ModelSelector";
-import TrainingSection from "@/components/TrainingSection";
-import { ref } from "vue";
+<script>
+import UploadFile from "@/components/UploadFile.vue";
+import ModelSelector from "@/components/ModelSelector.vue";
+import TrainingSection from "@/components/TrainingSection.vue";
 
-const currentStep = ref();
+export default {
+  components: {
+    UploadFile,
+    ModelSelector,
+    TrainingSection,
+  },
+  data() {
+    return {
+      currentStep: 0,
+    };
+  },
+
+};
 </script>
