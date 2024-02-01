@@ -1,6 +1,7 @@
 <template>
   <div>
-    <v-select label="Model" :items="['XGBoost', 'Classifier', 'Regressor']"></v-select>
+    <v-select label="Model" :items="['XGBoost', 'Classifier', 'Regressor', 'K-means']"
+      @update:modelValue="onModelChange"></v-select>
     <div class="slider-container">
       <span>Train part</span>
       <v-slider v-model="slider" class="align-center" hide-details :max="100" :min="0" :step="1">
@@ -24,10 +25,21 @@
 </template>
 
 <script>
+import ModelParams from './data/ModelParams'
+
+const modelTrainPart = {
+  XGBoost: 20,
+  Classifier: 45,
+  Regressor: 55,
+  "K-means": 66,
+}
+
 export default {
   data() {
     return {
       slider: 0,
+      ModelParams,
+      selectedModel: '',
       optionModel: {
         N_estimators: '',
         Max_depth: '',
@@ -42,6 +54,28 @@ export default {
       ],
     };
   },
+
+  methods: {
+    async onModelChange(e) {
+      this.fieldList = ModelParams[e]
+      this.optionModel = Object.fromEntries(this.fieldList.map(fieldName => [fieldName, '']));
+      this.slider = modelTrainPart[e]
+      const data = {
+        model: e,
+        clusters: this.optionModel.clusters || 1
+      }
+      this.$emit('getFormModel', data)
+
+    }
+  },
+  watch: {
+    optionModel: {
+      deep: true,
+      handler(newVal) {
+        this.$emit('update:optionModel', newVal);
+      }
+    }
+  }
 };
 </script>
 

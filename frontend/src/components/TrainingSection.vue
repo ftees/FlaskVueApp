@@ -5,7 +5,9 @@
     </div>
 
     <div v-else-if="trainingComplete">
-      <p>Training complete!</p>
+      <p>Token:</p>
+      <span>{{ token }}</span>
+
     </div>
 
     <div v-else>
@@ -16,7 +18,7 @@
 
 <script>
 export default {
-  props: ['training', 'trainingComplete'],
+  props: ['training', 'trainingComplete', 'token'],
 };
 </script>
 
