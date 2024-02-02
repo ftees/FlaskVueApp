@@ -2,6 +2,7 @@
 import { createApp } from 'vue';
 import App from './App.vue';
 import vuetify from './plugins/vuetify' 
+import axios from 'axios';
 import 'vuetify/dist/vuetify.min.css'
 // Register components globally
 const app = createApp(App);

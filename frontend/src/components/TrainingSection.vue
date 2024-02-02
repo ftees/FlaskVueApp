@@ -1,27 +1,49 @@
 <template>
-  <div>
-    <div v-if="training">
-      <v-skeleton-loader :loading="training" type="card"></v-skeleton-loader>
-    </div>
+  <form @submit.prevent="submitForm">
+    <v-text-field v-model="formData.token" label="token"></v-text-field>
 
-    <div v-else-if="trainingComplete">
-      <p>Token:</p>
-      <span>{{ token }}</span>
+    <v-btn class="me-4" type="submit"> submit </v-btn>
+  </form>
 
-    </div>
-
-    <div v-else>
-      <button @click="$emit('train')">Train</button>
-    </div>
-  </div>
+  <p>{{ pred }}</p>
+  <img v-if="chartImage" :src="chartImage" alt="K-Means Chart" />
 </template>
 
 <script>
 export default {
-  props: ['training', 'trainingComplete', 'token'],
+  data() {
+    return {
+      formData: {
+        token: '',
+      },
+      pred: '',
+      chartImage: '',
+    };
+  },
+  methods: {
+    submitForm() {
+      fetch('/api/predict/' + this.formData.token, {
+        method: 'POST',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify(this.formData),
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          console.log('Server Response:', data);
+          this.pred = data['prediction'];
+          this.chartImage = `data:image/png;base64, ${data.chart_image}`;
+        })
+        .catch((error) => {
+          console.error('Error:', error);
+          this.pred = error;
+        });
+    },
+  },
 };
 </script>
 
 <style scoped>
-/* Styling specific to TrainingSection component */
+p {
+  margin: 20px;
+}
 </style>

@@ -17,7 +17,6 @@
     "vuetify": "^3.0.0"
   },
   "devDependencies": {
-    "@types/papaparse": "^5.3.14",
     "@vitejs/plugin-vue": "^4.5.0",
     "sass": "^1.69.0",
     "unplugin-fonts": "^1.1.0",
