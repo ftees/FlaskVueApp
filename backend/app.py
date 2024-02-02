@@ -54,6 +54,33 @@ def register():
             'data': False,
             'message': "register fail",
         }), 400
+
+@app.route("/api/myname", methods=["GET"])
+def myname():
+    try:
+        return jsonify({
+            'data': db.getCurrentUsername(),
+            'message': "get username success",
+        })
+    except Exception as e:
+        return jsonify({
+            'data': False,
+            'message': "get username fail",
+        }), 400
+
+@app.route("/api/logout", methods=["GET"])  
+def logout():
+    try:
+        db.logout()
+        return jsonify({
+            'data': True,
+            'message': "logout success",
+        })
+    except Exception as e:
+        return jsonify({
+            'data': False,
+            'message': "logout fail",
+        }), 400   
 # upload file
 @app.route("/upload", methods=["POST"])
 def upload():

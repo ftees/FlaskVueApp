@@ -51,11 +51,25 @@ export default {
       })
         .then((res) => res.json())
         .then((data) => {
-          if (data) {
+          if (data.data && data.message === 'login success') {
+            console.log(data);
+            this.getMe();
             router.push('/training');
           } else {
             alert('Login failed');
           }
+        });
+    },
+    getMe() {
+      fetch('http://localhost:5000/api/myname', {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          console.log(data);
         });
     },
   },

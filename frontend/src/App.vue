@@ -1,7 +1,9 @@
 <!-- src/views/Home.vue -->
 <template>
   <div class="main-container">
-    <router-view></router-view>
+    <v-app>
+      <router-view></router-view>
+    </v-app>
   </div>
 </template>
 
@@ -13,9 +15,11 @@ export default {
   components: {
     UploadTrainingPage,
   },
+  data: () => ({
+    currentRoute: window.location.pathname,
+  }),
+  methods: {},
 };
 </script>
 
-<style scoped>
-/* Add your styling here if needed */
-</style>
+<style scoped></style>
