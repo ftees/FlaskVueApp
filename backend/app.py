@@ -12,11 +12,13 @@ import base64
 import matplotlib
 matplotlib.use('Agg')  # Set the backend to Agg
 import matplotlib.pyplot as plt
-
+from dataBase import DataBase
 app = Flask(__name__)
+
+
+# Create a new instance of the database
+db = DataBase(app)
 CORS(app) 
-
-
 @app.route("/")
 def home():
     return "Hello, Flask!"
@@ -24,6 +26,34 @@ def home():
 df = r'D:\projetweb\backend\uploads\wine.csv'
 
 
+@app.route("/api/login", methods=["POST"])
+
+def login():
+    try:
+        db.isValidUser(request.json['username'], request.json['password'])
+        return jsonify({
+            'data': True,
+            'message': "login success",
+        }), 200
+    except Exception as e:
+        return jsonify({
+            'data': False,
+            'message': "data fail",
+        }), 400
+
+@app.route("/api/register", methods=["POST"])
+def register():
+    try:
+        db.addNewUser(request.json['username'], request.json['password'])
+        return jsonify({
+            'data': True,
+            'message': "register success",
+        })
+    except Exception as e:
+        return jsonify({
+            'data': False,
+            'message': "register fail",
+        }), 400
 # upload file
 @app.route("/upload", methods=["POST"])
 def upload():

@@ -1,0 +1,11 @@
+{
+    "users": {
+        "admin": {
+            "password": "$2b$12$I31fr75ssaUqKTITkEbs4.qJzqQTV9RzcOvmfcgPMjmhKVWnx0goe",
+            "models": [],
+            "datasets": [],
+            "salt": "aty>5UiP9xp`cm:6"
+        }
+    },
+    "models": {}
+}
